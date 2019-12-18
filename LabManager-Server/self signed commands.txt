@@ -1,0 +1,225 @@
+resumo:
+openssl genrsa -out server.key 4096
+openssl rsa -in server.key -out nserver.key
+openssl req -sha256 -new -key server.key -out server.csr
+	Country Name (2 letter code) [AU]:BR
+	State or Province Name (full name) [Some-State]:Rondonia
+	Locality Name (eg, city) []:Vilhena
+	Organization Name (eg, company) [Internet Widgits Pty Ltd]:Kcire Systems
+	Organizational Unit Name (eg, section) []:Kcire
+	Common Name (e.g. server FQDN or YOUR name) []:VHA-LABADS-PROF
+	Email Address []:erick.weil@ifro.edu.br
+
+	Please enter the following 'extra' attributes
+	to be sent with your certificate request
+	A challenge password []:1a2b3c4d
+	An optional company name []:Kcire Systems
+
+openssl x509 -req -sha256 -days 1095 -in server.csr -signkey nserver.key -out server.crt
+openssl x509 -in server.crt -text -noout
+openssl pkcs12 -export -in server.crt -inkey server.key -certfile server.crt -out server_pkcs.p12
+keytool -importkeystore -srckeystore server_pkcs.p12 -srcstoretype pkcs12 -destkeystore server_keystore.jks -deststoretype JKS
+keytool -importcert -keystore client_trustore.jks -storepass 1a2b3c4d -file server.crt
+
+referencias:
+https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl?rq=1
+http://xacmlinfo.org/2014/06/13/how-to-keystore-creating-jks-file-from-existing-private-key-and-certificate/
+https://www.openssl.org/docs/manmaster/man1/
+https://www.cloudera.com/documentation/enterprise/5-2-x/topics/cm_sg_create_key_trust.html
+
+por extenso:
+
+C:\OpenSSL-Win64\bin>openssl req -config kcire.conf -new -x509 -sha256 -newkey r
+sa:4096 -nodes -keyout kcire.key.pem -days 1095 -out kcire.cert.pem
+req: Cannot open input file kcire.conf, No such file or directory
+req: Use -help for summary.
+
+C:\OpenSSL-Win64\bin>openssl genrsa -out server.key 4096
+Generating RSA private key, 4096 bit long modulus
+............................................++
+................................................................................
+................................................................................
+................................................................................
+......++
+e is 65537 (0x010001)
+
+C:\OpenSSL-Win64\bin>openssl rsa -in server.key -out nserver.key
+writing RSA key
+
+C:\OpenSSL-Win64\bin>oprenssl req -sha256 -new -key server.key -out server.csr
+'oprenssl' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
+
+C:\OpenSSL-Win64\bin>openssl req -sha256 -new -key server.key -out server.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:BR
+State or Province Name (full name) [Some-State]:Rondonia
+Locality Name (eg, city) []:Vilhena
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Kcire Systems
+Organizational Unit Name (eg, section) []:Kcire
+Common Name (e.g. server FQDN or YOUR name) []:VHA-LABADS-PROF
+Email Address []:erick.weil@ifro.edu.br
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:1a2b3c4d
+An optional company name []:Kcire Systems
+
+C:\OpenSSL-Win64\bin>openssl x509 -req -sha256 -days 1095 -in server.csr -signke
+y nserver.key -out server.crt
+Signature ok
+subject=C = BR, ST = Rondonia, L = Vilhena, O = Kcire Systems, OU = Kcire, CN =
+VHA-LABADS-PROF, emailAddress = erick.weil@ifro.edu.br
+Getting Private key
+
+C:\OpenSSL-Win64\bin>openssl x509 -in server.crt -text -noout
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number:
+            ee:b8:98:81:d3:fd:a4:4f
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C = BR, ST = Rondonia, L = Vilhena, O = Kcire Systems, OU = Kcir
+e, CN = VHA-LABADS-PROF, emailAddress = erick.weil@ifro.edu.br
+        Validity
+            Not Before: Nov 11 00:00:57 2017 GMT
+            Not After : Nov 10 00:00:57 2020 GMT
+        Subject: C = BR, ST = Rondonia, L = Vilhena, O = Kcire Systems, OU = Kci
+re, CN = VHA-LABADS-PROF, emailAddress = erick.weil@ifro.edu.br
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (4096 bit)
+                Modulus:
+                    00:9e:a9:f7:2a:fb:70:44:5c:5e:24:1c:a2:d4:ef:
+                    18:ca:68:79:c1:c9:c1:fb:07:6c:52:44:17:24:0b:
+                    7b:8c:b8:e8:26:ff:7b:72:5d:ac:8f:c2:b4:d7:ab:
+                    ce:73:05:69:de:20:3b:8a:c2:60:70:43:9f:9c:dc:
+                    f7:35:f6:43:74:5f:b7:ee:95:8f:a6:8a:a2:c8:d6:
+                    ff:02:d7:77:bd:d1:06:77:2a:76:7c:93:b8:6c:7e:
+                    c1:f0:e6:af:76:48:93:20:79:ee:d0:fd:1c:74:85:
+                    06:13:32:e1:4c:f6:cc:2f:d0:d8:ce:8c:c5:49:38:
+                    a4:10:0b:39:a7:d5:5c:24:18:b7:21:24:e3:32:d2:
+                    a3:d7:02:cd:99:60:b7:5b:bf:4f:fa:ac:2a:94:a7:
+                    ac:f4:53:12:f3:23:88:55:ba:c4:fa:c3:2b:d0:1c:
+                    2b:33:38:ba:17:25:46:93:ac:ce:27:60:45:f5:c5:
+                    2c:2b:e4:30:ab:57:3f:4d:0c:08:de:33:50:66:00:
+                    1a:22:47:f0:fb:df:d2:f5:1c:96:9c:a1:e8:d8:1b:
+                    68:6d:0e:ac:50:1f:a3:62:9e:86:9a:e3:ae:62:de:
+                    cc:0f:ef:72:86:1e:98:aa:84:9b:00:8d:12:7e:3a:
+                    8f:58:da:6b:0f:2f:b4:2d:87:49:02:4e:3d:ec:be:
+                    2d:14:89:77:6a:05:1e:c8:9f:d0:11:9f:62:22:94:
+                    e8:dc:28:ac:0a:9f:30:06:43:9a:39:72:31:4f:ff:
+                    78:ec:51:be:cc:dc:3e:47:67:0b:d1:df:d7:06:11:
+                    e4:be:76:f0:9b:39:2b:22:8c:a4:6e:37:57:3b:25:
+                    15:a6:e9:29:8e:c3:07:0c:15:a0:69:63:ad:a0:f0:
+                    c7:4f:0d:a4:5a:4e:6c:ae:79:b6:ca:c5:99:40:28:
+                    3e:ea:b4:35:b8:ae:2d:d7:47:79:ee:be:65:c1:7c:
+                    54:d7:62:23:97:36:44:62:b5:ff:7f:6d:c5:89:67:
+                    04:66:97:3f:b3:29:94:2a:fb:5b:e6:21:0f:38:2e:
+                    ce:ed:77:ef:e5:58:c7:9e:9c:16:31:36:0e:49:bf:
+                    25:07:56:68:0e:c5:f5:0f:41:2a:23:fa:f4:db:59:
+                    47:13:24:88:d6:d6:e9:51:86:34:29:45:f0:0f:fd:
+                    08:84:f1:d2:be:e8:37:5b:4f:34:be:24:84:4d:72:
+                    22:31:91:72:83:0a:44:51:59:ce:b0:b8:06:a1:ab:
+                    ae:b9:26:0e:17:76:4b:81:aa:dc:2e:e3:94:04:64:
+                    5e:50:3f:8d:4b:c3:6a:79:8e:39:6a:1e:28:1d:b2:
+                    5f:2c:cf:7c:6f:46:a9:8f:88:10:67:8e:90:57:86:
+                    6c:84:5b
+                Exponent: 65537 (0x10001)
+    Signature Algorithm: sha256WithRSAEncryption
+         8f:b1:44:74:72:83:05:ee:16:70:b2:dc:ba:1d:ca:8b:25:2b:
+         5f:1b:51:03:19:4e:36:71:61:2f:7c:1a:2b:12:3b:c6:38:b9:
+         a5:a7:42:15:7d:ac:eb:2b:9f:a4:7e:3f:03:b7:54:9d:bf:84:
+         0b:4b:e5:d1:66:3a:5a:55:51:6f:dc:9d:6e:d0:ef:69:8c:2b:
+         4f:1d:24:83:a3:2e:81:a5:0a:ec:e7:27:f9:df:a4:38:a8:50:
+         57:96:48:e3:35:ae:f5:43:fe:b0:ec:95:ca:29:48:51:22:80:
+         96:95:0f:0f:11:dd:f4:99:99:da:7e:16:56:39:35:ff:41:7c:
+         b2:e3:fd:4b:48:72:e3:dd:66:5e:95:46:c7:0d:19:29:ba:9c:
+         91:ad:95:04:bb:4c:75:7e:f2:05:9f:7a:26:03:29:5c:f3:47:
+         ff:0e:90:19:21:54:fa:a3:03:98:a2:4a:c3:3d:90:ef:38:2a:
+         91:58:b2:f7:ed:16:2a:80:00:83:43:44:ce:c1:3a:6a:64:57:
+         40:e7:7f:53:80:0e:a8:00:80:20:3e:f3:8d:5a:f7:80:21:66:
+         ac:e1:da:8e:1e:7b:18:22:27:0f:3c:40:3e:7c:bd:be:ba:fc:
+         df:22:4f:d0:a2:64:32:19:90:81:d2:36:fd:0b:32:bb:61:35:
+         eb:6d:d8:d0:f9:db:4c:00:6e:55:af:56:0e:48:53:d0:87:ee:
+         34:d1:07:31:69:a7:97:b9:cd:56:d4:f1:26:98:de:bc:00:98:
+         ce:81:47:a1:b6:b0:c2:de:49:6a:01:17:0e:c3:85:ff:7e:ee:
+         4d:14:f0:38:38:8a:eb:fd:04:8b:ff:25:38:8c:e7:03:07:6c:
+         f7:2c:db:3f:81:de:eb:9e:37:59:55:ba:8b:23:e7:4f:f9:30:
+         50:53:57:9a:3e:e9:48:52:ed:90:9c:8e:f4:f3:dd:9f:72:3c:
+         86:20:3e:f5:e2:53:a5:fd:dc:8c:56:b0:ce:51:a2:fa:ea:bc:
+         cf:f8:33:50:e5:23:44:f4:67:79:fd:d9:33:26:0a:5d:79:43:
+         f5:e8:e8:26:c0:b5:da:47:a8:59:fd:b5:80:95:84:40:d7:4a:
+         49:e3:77:a4:92:26:bc:0d:e6:58:03:14:be:b0:7a:50:b6:b9:
+         5e:af:c6:63:37:01:fb:10:65:53:81:db:57:f9:fb:6a:be:f4:
+         21:59:55:33:26:44:93:3e:e4:ae:e9:1a:61:66:eb:35:b3:ad:
+         88:8e:09:1b:f5:4a:78:a5:56:5b:5f:35:83:a0:7c:72:89:4b:
+         a7:ba:8f:7c:38:2c:e1:1b:a4:fb:43:fc:ce:44:2c:df:81:10:
+         4f:a4:29:0a:d7:38:48:c4
+
+C:\OpenSSL-Win64\bin>openssl pkcs12 -export -in server.crt -inkey server.key -ce
+rtfile server.crt -out server_pkcs.p12
+Enter Export Password:
+Verifying - Enter Export Password:
+
+C:\OpenSSL-Win64\bin>keytool -importkeystore -srckeystore server_pkcs.p12 -srcst
+oretype pkcs12 -destkeystore server_keystore.jks -deststoretype JKS
+Informe a senha da área de armazenamento de chaves de destino:
+Informe novamente a nova senha:
+Informe a senha da área de armazenamento de chaves de origem:
+Entrada do alias 1 importada com êxito.
+Comando de importação concluído:  1 entradas importadas com êxito, 0 entradas fa
+lharam ou foram canceladas
+
+C:\OpenSSL-Win64\bin>keytool -importcert client_trustsore -storepass 1a2b3c4d -f
+ile server.crt
+Opção inválida:  client_trustsore
+keytool -importcert [OPTION]...
+
+Importa um certificado ou uma cadeia de certificados
+
+Opções:
+
+ -noprompt                       não perguntar
+ -trustcacerts                   certificados confiáveis do cacerts
+ -protected                      senha por meio de mecanismo protegido
+ -alias <alias>                  nome do alias da entrada a ser processada
+ -file <filename>                nome do arquivo de entrada
+ -keypass <arg>                  senha da chave
+ -keystore <keystore>            nome da área de armazenamento de chaves
+ -storepass <arg>                senha da área de armazenamento de chaves
+ -storetype <storetype>          tipo de área de armazenamento de chaves
+ -providername <providername>    nome do fornecedor
+ -providerclass <providerclass>  nome da classe do fornecedor
+ -providerarg <arg>              argumento do fornecedor
+ -providerpath <pathlist>        classpath do fornecedor
+ -v                              saída detalhada
+
+Use "keytool -help" para todos os comandos disponíveis
+
+C:\OpenSSL-Win64\bin>keytool -importcert -keystore client_trustore.jks -storepas
+s 1a2b3c4d -file server.crt
+Proprietário: EMAILADDRESS=erick.weil@ifro.edu.br, CN=VHA-LABADS-PROF, OU=Kcire,
+ O=Kcire Systems, L=Vilhena, ST=Rondonia, C=BR
+Emissor: EMAILADDRESS=erick.weil@ifro.edu.br, CN=VHA-LABADS-PROF, OU=Kcire, O=Kc
+ire Systems, L=Vilhena, ST=Rondonia, C=BR
+Número de série: eeb89881d3fda44f
+Válido de: Fri Nov 10 20:00:57 GMT-04:00 2017 a: Mon Nov 09 20:00:57 GMT-04:00 2
+020
+Fingerprints do certificado:
+         MD5:  1F:4E:58:25:32:A9:66:2B:89:D3:FA:13:2F:BA:29:F7
+         SHA1: 70:12:EE:1B:EC:E4:99:70:18:BF:AC:EA:2D:3C:27:C5:1E:2F:51:DB
+         SHA256: 4D:53:6A:9A:7D:35:0B:B4:AF:FE:EC:2C:99:9E:5B:88:70:F1:94:53:E3:
+9C:37:16:10:71:F5:1F:E4:84:3B:D9
+         Nome do algoritmo de assinatura: SHA256withRSA
+         Versão: 1
+Confiar neste certificado? [não]:  sim
+O certificado foi adicionado à área de armazenamento de chaves
+
+C:\OpenSSL-Win64\bin>

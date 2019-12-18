@@ -1,0 +1,252 @@
+
+
+Version:	3.10
+CmdLine:	D:\EclipseProjects\LabManager\executable\labmanager.exe --l4j-debug
+WOW64:		yes
+Create mutex:	KCIRELABMANAGER
+Working dir:	D:\EclipseProjects\LabManager\executable\.
+Java min ver:	1.8.0
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_65
+Check launcher:	C:\Program Files\Java\jre1.8.0_65\bin\javaw.exe (not found)
+Ignore:		1.8.0_065
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92
+Check launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe (OK)
+Match:		1.8.0_092
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_005
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_11
+Ignore:		1.8.0_011
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_65
+Ignore:		1.8.0_065
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.8.0_092 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe
+Launcher args:	-jar "D:\EclipseProjects\LabManager\executable\labmanager.exe"
+Args length:	62/32768 chars
+Exit code:	0
+
+
+Version:	3.10
+CmdLine:	D:\EclipseProjects\LabManager\executable\labmanager.exe --l4j-debug
+WOW64:		yes
+Create mutex:	KCIRELABMANAGER
+Working dir:	D:\EclipseProjects\LabManager\executable\.
+Java min ver:	1.8.0
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_65
+Check launcher:	C:\Program Files\Java\jre1.8.0_65\bin\javaw.exe (not found)
+Ignore:		1.8.0_065
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92
+Check launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe (OK)
+Match:		1.8.0_092
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_005
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_11
+Ignore:		1.8.0_011
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_65
+Ignore:		1.8.0_065
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.8.0_092 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe
+Launcher args:	-jar "D:\EclipseProjects\LabManager\executable\labmanager.exe"
+Args length:	62/32768 chars
+Exit code:	0
+
+
+Version:	3.10
+CmdLine:	D:\EclipseProjects\LabManager\executable\labmanager.exe --l4j-debug
+WOW64:		yes
+Create mutex:	KCIRELABMANAGER
+Working dir:	D:\EclipseProjects\LabManager\executable\.
+Java min ver:	1.8.0
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_65
+Check launcher:	C:\Program Files\Java\jre1.8.0_65\bin\javaw.exe (not found)
+Ignore:		1.8.0_065
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92
+Check launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe (OK)
+Match:		1.8.0_092
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_005
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_11
+Ignore:		1.8.0_011
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_65
+Ignore:		1.8.0_065
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.8.0_092 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe
+Launcher args:	-jar "D:\EclipseProjects\LabManager\executable\labmanager.exe"
+Args length:	62/32768 chars
+Exit code:	0
+
+
+Version:	3.10
+CmdLine:	D:\EclipseProjects\LabManager\executable\labmanager.exe --l4j-debug
+WOW64:		yes
+Create mutex:	KCIRELABMANAGER
+Working dir:	D:\EclipseProjects\LabManager\executable\.
+Java min ver:	1.8.0
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_65
+Check launcher:	C:\Program Files\Java\jre1.8.0_65\bin\javaw.exe (not found)
+Ignore:		1.8.0_065
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92
+Check launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe (OK)
+Match:		1.8.0_092
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_005
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_11
+Ignore:		1.8.0_011
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_65
+Ignore:		1.8.0_065
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.8.0_092 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe
+Launcher args:	-jar "D:\EclipseProjects\LabManager\executable\labmanager.exe"
+Args length:	62/32768 chars
+Exit code:	0
+
+
+Version:	3.10
+CmdLine:	D:\EclipseProjects\LabManager\executable\svchost.exe --l4j-debug
+WOW64:		yes
+Create mutex:	KCIRELABMANAGER
+Working dir:	D:\EclipseProjects\LabManager\executable\.
+Java min ver:	1.8.0
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_65
+Check launcher:	C:\Program Files\Java\jre1.8.0_65\bin\javaw.exe (not found)
+Ignore:		1.8.0_065
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92
+Check launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe (OK)
+Match:		1.8.0_092
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_005
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_11
+Ignore:		1.8.0_011
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_65
+Ignore:		1.8.0_065
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.8.0_092 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe
+Launcher args:	-jar "D:\EclipseProjects\LabManager\executable\svchost.exe"
+Args length:	59/32768 chars
+Exit code:	0
+
+
+Version:	3.10
+CmdLine:	D:\EclipseProjects\LabManager\executable\svchost.exe --l4j-debug
+WOW64:		yes
+Create mutex:	KCIRELABMANAGER
+Working dir:	D:\EclipseProjects\LabManager\executable\.
+Java min ver:	1.8.0
+Java max ver:	
+64-bit search:	SOFTWARE\JavaSoft\Java Runtime Environment...
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_65
+Check launcher:	C:\Program Files\Java\jre1.8.0_65\bin\javaw.exe (not found)
+Ignore:		1.8.0_065
+Check:		SOFTWARE\JavaSoft\Java Runtime Environment\1.8.0_92
+Check launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe (OK)
+Match:		1.8.0_092
+64-bit search:	SOFTWARE\JavaSoft\Java Development Kit...
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7
+Ignore:		1.7
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.7.0_79
+Ignore:		1.7.0_079
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8
+Ignore:		1.8
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_05
+Ignore:		1.8.0_005
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_11
+Ignore:		1.8.0_011
+Check:		SOFTWARE\JavaSoft\Java Development Kit\1.8.0_65
+Ignore:		1.8.0_065
+64-bit search:	SOFTWARE\JavaSoft\JRE...
+64-bit search:	SOFTWARE\JavaSoft\JDK...
+Runtime used:	1.8.0_092 (64-bit)
+Launcher:	C:\Program Files\Java\jre1.8.0_92\bin\javaw.exe
+Launcher args:	-jar "D:\EclipseProjects\LabManager\executable\svchost.exe"
+Args length:	59/32768 chars
+Exit code:	0

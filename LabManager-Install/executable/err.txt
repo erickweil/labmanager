@@ -1,0 +1,13 @@
+erro na linha: 'Node,ExecutablePath,ProcessId'
+java.lang.NumberFormatException: For input string: "ProcessId"
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Long.parseLong(Unknown Source)
+	at java.lang.Long.parseLong(Unknown Source)
+	at br.erickweil.labmanager.platformspecific.CmdExecWin._running_executables(CmdExecWin.java:303)
+	at br.erickweil.labmanager.cmd.CmdExec.stop(CmdExec.java:315)
+	at br.erickweil.labamanger.common.files.FilesHelper.delExeFile(FilesHelper.java:79)
+	at br.erickweil.labamanger.common.files.Unzip.extractFile(Unzip.java:109)
+	at br.erickweil.labamanger.common.files.Unzip.unzip(Unzip.java:58)
+	at br.erickweil.labmanager.install.UniversalInstaller.extractFilesFromResources(UniversalInstaller.java:156)
+	at br.erickweil.labmanager.install.AutoUpdater.run(AutoUpdater.java:126)
+	at br.erickweil.labmanager.install.AutoUpdater.main(AutoUpdater.java:65)

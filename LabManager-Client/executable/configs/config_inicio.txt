@@ -1,0 +1,5 @@
+conf_folder = "%appdata%/LabManager/conf/"
+down_folder = "%appdata%/LabManager/down/"
+log_folder = "%appdata%/LabManager/logs/"
+logtofile = false
+temp_folder = "%Temp%"

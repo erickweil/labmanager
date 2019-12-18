@@ -1,0 +1,35 @@
+blacklist =
+	"explorer.exe"
+	"taskmgr.exe"
+	"cmd.exe"
+;
+close_programs_name =
+	"Chrome"
+	"Notepad"
+	"Windows Explorer"
+;
+close_programs_process =
+	"chrome.exe"
+	"notepad.exe"
+	"explorer.exe"
+;
+IniciarInterfaceAutomaticamente = true
+IniciarMaximizado = true
+open_programs_name =
+	"Chrome"
+	"Scratch"
+	"Portugol"
+	"Mysql Workbench"
+	"Windows Explorer"
+	"Netbeans"
+	"Notepad"
+;
+open_programs_path =
+	"C:/Program Files \(x86\)/Google/Chrome/Application/chrome\.exe"
+	"C:/Program Files \(x86\)/Scratch 2/Scratch 2\.exe"
+	"C:/ProgramData/UNIVALI/Portugol Studio/inicializador\-ps\.jar"
+	"C:/Program Files/MySQL/MySQL Workbench.*/MySQLWorkbench\.exe"
+	"C:/Windows/explorer\.exe"
+	"C:/Program Files/NetBeans.*/bin/netbeans*\.exe"
+	"C:/Windows/system32/notepad\.exe"
+;

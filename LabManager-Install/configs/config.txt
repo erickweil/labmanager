@@ -1,0 +1,25 @@
+install = true
+install_destination = "C:\Program Files\labmanager\"
+install_directories_copy =
+"clientProgram.zip,C:\\Program Files\\labmanager\\"
+;
+install_keys =
+"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\LABMANAGER,REG_SZ,C:\\Program Files\\labmanager\\svchost.exe"
+;
+install_services =
+"C:\\Program Files\\labmanager\\nssm.exe,labmanager_master,C:\\Program Files\\labmanager\\labmanager_master.exe"
+;
+restartAfterInstall = false
+restartAfterKeyRemoval = false
+uninstall = true
+uninstall_directories =
+"C:\\Program Files\\labmanager\\"
+"C:\\Program Files\\dnsproxy\\"
+;
+uninstall_keys =
+"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\LABMANAGER"
+"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\DNSPROXY"
+;
+uninstall_services =
+"nssm.exe,labmanager_master"
+;

@@ -1,0 +1,12 @@
+delay_defaultsplash = 15000
+delay_fastcheck = 2000
+delay_slowcheck = 60000
+delay_wifiswitch = 4000
+endereco = "localhost"
+testendereco = "localhost"
+testing = true
+testsize = 40
+timeout_noserver = 120000
+uuid = "HJEtpJYqh/g33qoYSuf2PrdftjdMT3"
+wifi_autoconnect = false
+wifi_network = "none"

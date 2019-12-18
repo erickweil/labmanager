@@ -1,0 +1,34 @@
+auth_clients_by_address = false
+auth_clients_by_username = false
+
+IniciarInterfaceAutomaticamente = true
+IniciarMaximizado = true
+pingDelay = 20000
+programs =
+"Portugol"
+"C:/ProgramData/UNIVALI/Portugol Studio/inicializador\-ps\.jar"
+""
+"manual"
+"Netbeans"
+"C:/Program Files/NetBeans.*/bin/netbeans*\.exe"
+"netbeans64.exe"
+"manual"
+"Notepad"
+"C:/Win.*/system32/notepad\.exe"
+"notepad.exe"
+"blacklist"
+"Windows Explorer"
+"C:/Windows/explorer\.exe"
+"explorer.exe"
+"manual"
+"Gerenciador de Tarefas"
+"C:/Windows/System32/taskmgr\.exe"
+"taskmgr.exe"
+"manual"
+"Prompt Comando"
+"C:/Windows/System32/cmd\.exe"
+"cmd.exe"
+"manual"
+;
+readTimeout = 60000
+solve_hostname = true

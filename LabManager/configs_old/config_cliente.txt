@@ -1,0 +1,2 @@
+endereco = "192.168.2.18"
+serverpasshash = "$2a$12$098oGAO2Bjw24/S7geACkOvw60anO4W0bvURZKYYEoWMkDArg/3MO"
