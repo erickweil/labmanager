@@ -39,6 +39,6 @@ Thumbs.db
 nbproject/
 build/
 .gradle/
+.settings/
 dist/
 store/
-

@@ -1,0 +1,28 @@
+auth_address_list =
+"localhost"
+"127.0.0.1"
+"::1"
+"192.168.2.99"
+;
+auth_by_address = "none"
+auth_by_username = "none"
+auth_by_uuid = "none"
+auth_username_list =
+"Usuario"
+;
+auth_uuid_list =
+"qTFVO71islHs3rZGRCV6iKSO9ZpgS7Rb81QzPNsY"
+;
+client_programdir = "C:/ProgramData/LabManager061017"
+client_programexec = "C:/ProgramData/LabManager061017/LabManager.jar"
+delaySplash = 3500
+errconsole = false
+fastLoop = 1000
+IniciarInterfaceAutomaticamente = true
+IniciarMaximizado = true
+mapdir = "pcmaps/"
+preferencesdir = "prefs/"
+readTimeout = 60000
+slowLoop = 10000
+solve_hostname = true
+veryfastLoop = 100

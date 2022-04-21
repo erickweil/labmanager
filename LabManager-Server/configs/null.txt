@@ -1,0 +1,32 @@
+auth_address_list =
+"localhost"
+"127.0.0.1"
+"::1"
+"192.168.2.99"
+;
+auth_by_address = "none"
+auth_by_username = "none"
+auth_by_uuid = "none"
+auth_username_list =
+"Usuario"
+;
+auth_uuid_list =
+"qTFVO71islHs3rZGRCV6iKSO9ZpgS7Rb81QzPNsY"
+;
+delaySplash = 0
+errconsole = false
+fastLoop = 1000
+preferencesdir = "prefs/"
+readTimeout = 60000
+server_port = 22133
+slowLoop = 10000
+solve_hostname = true
+stream_framerate = 5
+stream_fullframeinterval = 50
+STREAM_port = 22135
+stream_width = 512
+uploader_hash_protocol = "MD5"
+uploader_maxspeed = 10.0
+uploader_package_size = 102400
+uploader_use_hash = true
+veryfastLoop = 100

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\EclipseProjects\LabManager-Server\store\LabManager.jar</jar>
+  <outfile>D:\EclipseProjects\LabManager-Server\executable\LabManager.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <singleInstance>
+    <mutexName>KCIRELABMANAGERSERVER</mutexName>
+    <windowTitle>Lab Manager Server</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>2.3.0.0</fileVersion>
+    <txtFileVersion>2.3.0.0</txtFileVersion>
+    <fileDescription>LabManager Server</fileDescription>
+    <copyright>K.C.I.R.E. Systems</copyright>
+    <productVersion>2.3.0.0</productVersion>
+    <txtProductVersion>2.3.0.0</txtProductVersion>
+    <productName>Lab Manager</productName>
+    <companyName>K.C.I.R.E. Systems</companyName>
+    <internalName>LabManager</internalName>
+    <originalFilename>LabManager.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>PORTUGUESE_BRAZIL</language>
+  </versionInfo>
+</launch4jConfig>
