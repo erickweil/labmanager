@@ -36,9 +36,14 @@ Thumbs.db
 ############
 *.jks
 *.jks.aes
-nbproject/
 build/
 .gradle/
 .settings/
 dist/
 store/
+/LabManager-Install/nbproject/private/
+/LabManager-Server/nbproject/private/
+/LabProxy/nbproject/private/
+/LabStream/nbproject/private/
+/WebServer/nbproject/private/
+/LabManager/nbproject/private/
