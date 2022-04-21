@@ -38,6 +38,11 @@ import javax.swing.JTextArea;
  */
 public class UniversalInstaller {
     
+    public static void main(String[] args)
+    {
+        mkdirsWithoutRenaming(new File("a/b/c/d"));
+    }
+    
     public static void exec(StatusReceiver g,String ... args)
     {
         if(g != null)g.sendMessage(String.join(" ", args));
@@ -104,7 +109,8 @@ public class UniversalInstaller {
                 String[] split = directories[i].split(",");
                 File source = new File(split[0]);
                 File destination = new File(split[1]);
-                destination.mkdirs();
+                mkdirsWithoutRenaming(destination);
+                //destination.mkdirs();
                 
                 if(source.exists())
                 {
@@ -142,7 +148,8 @@ public class UniversalInstaller {
         
         File dest = new File(destination);
         g.sendMessage("Criando diretórios");
-        dest.mkdirs();
+        mkdirsWithoutRenaming(dest);
+        //dest.mkdirs();
         
         
         in = Install.class.getResourceAsStream(resource);
@@ -306,6 +313,33 @@ public class UniversalInstaller {
                 g.sendMessage("Erro ao deletar '"+directories[i]+"': "+e.getClass().toString()+" -> "+e.getMessage());
             }
         }
+    }
+    
+    // para não mudar "Arquivos de Programas" para "Program Files"
+    public static boolean mkdirsWithoutRenaming(File abspathname)
+    {
+        List<File> toCreate = new ArrayList<>();
+        
+        File dir = abspathname;
+        
+        System.out.println("Creating dirs of "+abspathname.toString());
+        
+        while(dir != null && !dir.exists())
+        {
+            System.out.println("Adding "+dir.toString());
+            toCreate.add(dir);
+            
+            dir = dir.getParentFile();
+        }
+        
+        for(int i=toCreate.size()-1;i>=0;i--)
+        {
+            File d = toCreate.get(i);
+            System.out.println("mkdir "+d.toString());
+            d.mkdir();
+        }
+        
+        return abspathname.exists();
     }
     
 

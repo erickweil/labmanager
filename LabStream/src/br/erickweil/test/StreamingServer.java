@@ -36,6 +36,7 @@ public class StreamingServer {
         DatagramSocket serverSocket = new DatagramSocket(9876);
         imagelistener = new StreamingWindow();
         imagelistener.run();
+        System.out.println("??");
         //StreamingServer instance = new StreamingServer();
         //StreamingWindow.run(instance);
         
@@ -49,10 +50,16 @@ public class StreamingServer {
             serverSocket.receive(receivePacket);
             byte[] data = receivePacket.getData();
             int index = data[0] & 0xFF | (data[1] << 8) & 0xFF00 | (data[2] << 16) & 0xFF0000 | (data[3] << 24) & 0xFF000000;
+            
+            
+            System.out.println("index: "+index);
             if(index == -1)
             {
                 transmission_width = data[4] & 0xFF | (data[5] << 8) & 0xFF00;
                 transmission_height = data[6] & 0xFF | (data[7] << 8) & 0xFF00;
+                
+                
+                System.out.println("w: "+transmission_width+" h:"+transmission_height);
             }
         }
         System.out.println("w:"+transmission_width+" h:"+transmission_height);
@@ -116,11 +123,13 @@ public class StreamingServer {
     }
     static BufferedImage myImg;
     static int last_index = -1;
-    public static synchronized void receive_hilbert(byte[] data) throws Exception
+    public static void receive_hilbert(byte[] data) throws Exception
     {
         int index = data[0] & 0xFF | (data[1] << 8) & 0xFF00 | (data[2] << 16) & 0xFF0000 | (data[3] << 24) & 0xFF000000;
         if ((index == -1 || last_index > (index+packet_size*10)) && img != null && imagelistener != null) {
-            imagelistener.setImage(img.getImage());
+            BufferedImage resimage = img.getImage();
+
+            imagelistener.setImage(resimage);
         } else if (index != -1) {
         // System.out.println("DECODING: " + index);
         byte[] pixels = new byte[data_size];

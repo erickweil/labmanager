@@ -42,9 +42,10 @@ public class ProgramOpener {
         {
             "%windir%/System32/notepad.exe",
             "C:/ProgramData/UNIVALI/Portugol Studio/inicializador-ps.jar",
-            "C:/Program Files/NetBeans.*/bin/netbeans.*\\.exe",
-            "%JAVA_HOME%/bin/javaw.exe"
-            
+            "C:/Program Files/NetBeans.*/netbeans/bin/netbeans.*\\.exe",
+            "%PROGRAMFILES%/Java/j.*/bin/javaw.exe",
+            "<downloads>/teste.txt",
+            "%USERPROFILE%/Downloads"
         };
         for(String s : test)
         {
@@ -130,10 +131,11 @@ public class ProgramOpener {
                     System.out.println("env_var: '"+path+"' deve aparecer em primeiro lugar no caminho.");
                     return null;
                 }
-                String env_var = System.getenv(dirs[i].substring(1, dirs[i].length()-1));
+                String env_var_name = dirs[i].substring(1, dirs[i].length()-1);
+                String env_var = System.getenv(env_var_name);
                 if(env_var == null || env_var.isEmpty())
                 {
-                    System.out.println("env_var: '"+env_var+"' não encontrada");
+                    System.out.println("env_var: '"+env_var_name+"' não encontrada");
                     return null;
                 }
                 File env_file = new File(env_var);

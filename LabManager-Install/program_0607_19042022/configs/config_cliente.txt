@@ -16,6 +16,5 @@ testendereco = "localhost"
 testing = false
 testsize = 40
 timeout_noserver = 120000
-uuid = "h5XuntK2qfAnV+0Jgk7eH3vv6sDmGQ"
 wifi_autoconnect = false
 wifi_network = "none"

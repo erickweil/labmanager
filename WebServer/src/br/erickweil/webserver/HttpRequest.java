@@ -51,7 +51,7 @@ public class HttpRequest extends HttpBase{
 			System.out.println("ping request");
 			return false;
 		}
-		System.out.println(Request_line);
+		if(LOG)System.out.println(Request_line);
 		String[] Request_split = Request_line.split(" ");
 		method = Request_split[0];
 		uri = Request_split[1];
@@ -71,7 +71,7 @@ public class HttpRequest extends HttpBase{
 	public void writeIntoOutputStream(DataOutputStream writer) throws IOException
 	{
 		ReaderWriter.writeASCII(method+" "+uri+" "+http_version+CRLF,writer);
-		System.out.println(method+" "+uri+" "+http_version);
+		if(LOG)System.out.println(method+" "+uri+" "+http_version);
 		//if(cookies!=null)
 		//{
 		//	setHeader("Cookie", Cookie.encodeCookies(cookies));

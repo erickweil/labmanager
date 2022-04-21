@@ -41,6 +41,7 @@ import br.erickweil.webserver.ServerProtocol;
 import br.erickweil.webserver.WebServer;
 import java.net.InetAddress;
 import java.security.SecureRandom;
+import java.security.Security;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,31 +61,43 @@ public class ClientMain {
     public static boolean _master_slave = true;
     public static final String IPC_host = "127.0.0.1";
     public static final int IPC_port = 22134;
-    public static final int ASYNC_port = 22136;
+    //public static final int ASYNC_port = 22136;
     public static int _STREAM_port = 22135;
     
     public static String _uuid = "none";
+    // Informações sobre o computador/sala Usado apenas para identificação no server remoto
+    public static String _extra = "{\"idConta\":1,\"grupo\":\"ifro_lab06\"}";
+    //public static String _extra = "{\"idConta\":1,\"grupo\":\"casa\"}";
 	// 123456 hash
 	//public static String _serverpasshash = "$s0$100801$wpvi6RatmHTufOf0J11XFg==$nUUrwbIYPjQdC6pT/GCpSPtB9LIHhN+a5FYm2g80YbU=";
     public static boolean _testing = false;
     public static int _testsize = 40;
     // timeout para assumir que o servidor está offline. 
     // Diminui o uso do computador após esse tempo, para não sobrecarregar sem necessidade.
-    public static int _timeout_noserver = 120000;
+    public static int _timeout_noserver = 180000;
     // Tempo de checagem rápida e lenta. são os tempos de checagem:
     // se não conseguir conectar ao servidor antes do timeout acima
     // irá passar a checar se o servidor está ativo usando o slowcheck.
     // obs: se conectar ao menos uma vez, sempre irá usar o fastcheck
-    public static int _delay_fastcheck = 2000;
-    public static int _delay_slowcheck = 60000;
+    public static int _delay_fastcheck = 10000;
+    public static int _delay_slowcheck = 180000;
     // Tempo mínimo que deve aguardar após tentar trocar a rede wifi (_wifi_autoconnect == true)
     public static int _delay_wifiswitch = 4000;
     public static int _delay_defaultsplash = 15000;
     
     // Tempo de checagem dos programas
-    public static int _delay_taskkiller = 1500;
+    public static int _delay_taskkiller = 5000;
+    
+    
+    // Define a forma da conexão com o servidor
+    // _synchronize_remote_host e _synchronize_remote_uri definem o site a ser conectado via HTTPS
+    public static boolean _synchronize_remote = true;
+    public static String _synchronize_remote_host = "app.passapassa.com.br";
+    public static String _synchronize_remote_uri = "/labmanager/synchronize.php";
     
     public static boolean isMaster = true;
+    
+    public static Configurable conf;
     
     public static String genUuid() {
         String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890+/";
@@ -125,7 +138,7 @@ public class ClientMain {
     public static void startSlave() throws IOException, InterruptedException {
         isMaster = false;
         start();
-        
+        /* Isso aqui nem é usado kk
         WebServer Async_server = new WebServer(ASYNC_port, new ProtocolFactory() {
         @Override
         public ServerProtocol get() {
@@ -136,16 +149,20 @@ public class ClientMain {
         Async_server._bind_address = InetAddress.getLoopbackAddress();
         
         new Thread(Async_server).start();
-        
+        */
         
         SlaveApp client = new SlaveApp(_uuid,_endereco);
         new Thread(client).start();
     }
     
 	public static void start() throws IOException, InterruptedException {
-           
+        
+            //https://www.baeldung.com/jce-enable-unlimited-strength
+            Security.setProperty("crypto.policy", "unlimited");
+            
+            
             try {
-			Configurable conf = new Configurable(new SimpleLogger(),ClientMain.class, "config_cliente");
+			conf = new Configurable(new SimpleLogger(),ClientMain.class, "config_cliente");
                         // gera um uuid com uma chance baixa de colisao ( uma em 64^30 )
                         if(_uuid.equals("none"))
                         {

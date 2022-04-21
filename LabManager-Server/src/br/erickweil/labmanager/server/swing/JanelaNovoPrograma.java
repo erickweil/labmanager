@@ -120,7 +120,7 @@ public class JanelaNovoPrograma extends javax.swing.JFrame implements ChangeList
                 combo_addprograma_inicializacao.setSelectedItem(program.start.toString());
                 combo_addprograma_modo.setSelectedItem(program.mode.toString());
                 
-                button_addprograma.setText("Editar");
+                button_addprograma.setText("Salvar");
             }
             
             
@@ -151,22 +151,36 @@ public class JanelaNovoPrograma extends javax.swing.JFrame implements ChangeList
         DefaultTableModel model = (DefaultTableModel) table_conditions.getModel();
         while(model.getRowCount()>0) model.removeRow(0);
         
+        Condition cond = null;
         if(conditions.size() == 0)
         {
-            conditions.add(new Condition(ConditionVar.processo, ConditionMatch.exatamente, "", false));
+            cond = new Condition(ConditionVar.processo, ConditionMatch.exatamente, "", false);
+            conditions.add(cond);
+        }
+        else
+        {
+            cond = conditions.get(0);
         }
         
         if(combo_addprograma_modo.getSelectedItem().toString().equals("processo"))
         {
-            conditions.set(0,new Condition(ConditionVar.processo,ConditionMatch.regex,input_addprograma_processo.getText(),false));
+            cond.var = ConditionVar.processo;
+            cond.value = input_addprograma_processo.getText();
+            cond.inverse = false;
         }
         else if(combo_addprograma_modo.getSelectedItem().toString().equals("caminho"))
         {
-            conditions.set(0,new Condition(ConditionVar.caminho,ConditionMatch.regex,input_addprograma_caminho.getText(),false));
+            //conditions.set(0,new Condition(ConditionVar.caminho,ConditionMatch.regex,input_addprograma_caminho.getText(),false));
+            cond.var = ConditionVar.caminho;
+            cond.value = input_addprograma_caminho.getText();
+            cond.inverse = false;
         }
         else
         {
-            conditions.set(0,new Condition(ConditionVar.janela,ConditionMatch.regex,input_addprograma_janela.getText(),false));
+            //conditions.set(0,new Condition(ConditionVar.janela,ConditionMatch.regex,input_addprograma_janela.getText(),false));
+            cond.var = ConditionVar.janela;
+            cond.value = input_addprograma_janela.getText();
+            cond.inverse = false;
         }
         
         for(int i=0;i<conditions.size();i++)
@@ -179,24 +193,28 @@ public class JanelaNovoPrograma extends javax.swing.JFrame implements ChangeList
     
     public void selecionou_condicao(int row)
     {
-        if(row < 1) // a linha 0 não pode ser editada
+        DefaultTableModel model = (DefaultTableModel) table_conditions.getModel();   
+        if(row < 0) // a linha 0 não pode ser editada, só o match
         {
-            WeilUtils.disableAll(false,combo_cond_var,combo_cond_match,field_cond_value,btn_cond_save,btn_cond_remove,check_cond_inv);
-            this.combo_cond_var.setSelectedIndex(0);
-            this.combo_cond_match.setSelectedIndex(0);
-            this.field_cond_value.setText("");
+            WeilUtils.disableAll(false,combo_cond_var,field_cond_value,btn_cond_remove,check_cond_inv,btn_cond_save,combo_cond_match);
+        }
+        else if(row < 1) // a linha 0 não pode ser editada, só o match
+        {
+            WeilUtils.disableAll(false,combo_cond_var,field_cond_value,btn_cond_remove,check_cond_inv);
+            
+            WeilUtils.enableAll(false,combo_cond_match,btn_cond_save);
         }
         else
         {
-            DefaultTableModel model = (DefaultTableModel) table_conditions.getModel();    
-            
-            WeilUtils.enableAll(false,combo_cond_var,combo_cond_match,field_cond_value,btn_cond_save,btn_cond_remove,check_cond_inv);
+            WeilUtils.enableAll(false,combo_cond_var,field_cond_value,btn_cond_remove,check_cond_inv,combo_cond_match,btn_cond_save);
+        }
+        
+        if(row >= 0 && row < model.getRowCount())
+        {
             this.combo_cond_var.setSelectedItem(model.getValueAt(row,0));
             this.combo_cond_match.setSelectedItem(model.getValueAt(row,1));
             this.field_cond_value.setText((String)model.getValueAt(row,2));
         }
-        
-        
     }
 
     private String combo_text(JComboBox c)
@@ -413,7 +431,6 @@ public class JanelaNovoPrograma extends javax.swing.JFrame implements ChangeList
                 return canEdit [columnIndex];
             }
         });
-        table_conditions.setShowHorizontalLines(false);
         jScrollPane1.setViewportView(table_conditions);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Editando Linha"));
@@ -424,7 +441,7 @@ public class JanelaNovoPrograma extends javax.swing.JFrame implements ChangeList
 
         jLabel9.setText("Mét. Checagem:");
 
-        combo_cond_match.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "exatamente", "comeca", "termina", "regex" }));
+        combo_cond_match.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "exatamente", "comeca", "termina", "contem", "regex" }));
 
         jLabel10.setText("Valor:");
 
@@ -638,15 +655,19 @@ public class JanelaNovoPrograma extends javax.swing.JFrame implements ChangeList
     }//GEN-LAST:event_button_addconditionActionPerformed
 
     private void btn_cond_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cond_saveActionPerformed
-        if(table_conditions.getSelectedRow() > 0)
+        if(table_conditions.getSelectedRow() >= 0)
         {
-            DefaultTableModel model = (DefaultTableModel) table_conditions.getModel();
+            //DefaultTableModel model = (DefaultTableModel) table_conditions.getModel();
             Condition cond = conditions.get(table_conditions.getSelectedRow());
 
-            cond.var = ConditionVar.valueOf(this.combo_cond_var.getSelectedItem().toString());
+            if(table_conditions.getSelectedRow() > 0)
+            {
+                cond.var = ConditionVar.valueOf(this.combo_cond_var.getSelectedItem().toString());
+                cond.value = this.field_cond_value.getText();
+                cond.inverse = this.check_cond_inv.isSelected();
+            }
+            
             cond.match = ConditionMatch.valueOf(this.combo_cond_match.getSelectedItem().toString());
-            cond.value = this.field_cond_value.getText();
-            cond.inverse = this.check_cond_inv.isSelected();
         }
         atualizar_condicoes();
     }//GEN-LAST:event_btn_cond_saveActionPerformed

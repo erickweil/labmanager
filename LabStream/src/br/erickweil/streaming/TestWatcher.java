@@ -23,7 +23,8 @@ public class TestWatcher {
         window.setVisible(true);
         //StreamWatcher streamer = new HilbertWatcher("230.0.0.0", 9876, window);
         //streamer.startTask();
-        TCPStreamWatcher streamer = new TCPHilbertWatcher("192.168.2.201", 9876, window);
+        //TCPStreamWatcher streamer = new TCPHilbertWatcher("192.168.2.201", 9876, window);
+        TCPStreamWatcher streamer = new TCPHilbertWatcher("localhost", 9876, window);
         streamer.startTask();
     } 
 }

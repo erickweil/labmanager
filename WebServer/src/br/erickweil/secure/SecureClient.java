@@ -50,10 +50,13 @@ public class SecureClient implements Runnable {
         this.port = port;
         this.host = host;
         this.protocolfactory = protocolfactory;
-        // https://www.sslshopper.com/article-how-to-create-a-self-signed-certificate-using-java-keytool.html
-        System.setProperty("javax.net.ssl.trustStore", keystore);
-        System.setProperty("javax.net.ssl.trustStorePassword", password);
         
+        if(keystore != null)
+        {
+            // https://www.sslshopper.com/article-how-to-create-a-self-signed-certificate-using-java-keytool.html
+            System.setProperty("javax.net.ssl.trustStore", keystore);
+            System.setProperty("javax.net.ssl.trustStorePassword", password);
+        }
     }
     
     @Override

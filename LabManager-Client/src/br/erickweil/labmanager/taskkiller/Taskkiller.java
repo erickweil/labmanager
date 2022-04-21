@@ -197,6 +197,27 @@ public class Taskkiller implements Runnable{
             doExecCheck = false;
         }
         
+        public boolean checkstr(Program.ConditionMatch match,String name, String process)
+        {
+            if(name == null || process == null) return false;
+            String lname = name.toLowerCase();
+            String lprocess = process.toLowerCase();
+            switch(match)
+            {
+                case inicia:
+                    return lname.startsWith(lprocess);
+                case termina:
+                    return lname.endsWith(lprocess);
+                case contem:
+                    return lname.contains(lprocess);
+                case regex:
+                    return name.matches(process);
+                default:
+                case exatamente:
+                return lname.equals(lprocess);
+            }
+        }
+        
         public List<CmdProcess> checkCondition(Program.Condition cond, List<CmdProcess> candidates)
         {
             List<CmdProcess> ret = new ArrayList<>();
@@ -221,8 +242,9 @@ public class Taskkiller implements Runnable{
                         try {
                             if (c.name != null)
                             {
-                                boolean condEval = (c.name.equalsIgnoreCase(process) || c.name.matches(process));
-                            
+                                //boolean condEval = (c.name.equalsIgnoreCase(process) || c.name.matches(process));
+                                boolean condEval = checkstr(cond.match, c.name, process);
+                                
                                 if((cond.inverse && !condEval) || (!cond.inverse && condEval))
                                 {
                                     if(candidates == null || candidates.contains(c))
@@ -245,7 +267,8 @@ public class Taskkiller implements Runnable{
                         try {
                             if (c.windowTitle != null)
                             {
-                                boolean condEval = (c.windowTitle.equalsIgnoreCase(cond.value) || c.windowTitle.matches(cond.value));
+                                //boolean condEval = (c.windowTitle.equalsIgnoreCase(cond.value) || c.windowTitle.matches(cond.value));
+                                boolean condEval = checkstr(cond.match, c.windowTitle, cond.value);
                                 
                                 if((cond.inverse && !condEval) || (!cond.inverse && condEval))
                                 {

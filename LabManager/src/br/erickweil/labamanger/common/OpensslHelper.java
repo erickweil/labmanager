@@ -132,25 +132,29 @@ public class OpensslHelper {
             
             if(new File("clientProgram\\client_trustore.jks").exists())
             {
-                if(!(consoleOut == null))consoleOut.append("\n\ndeletando client_trustore.jks para não causar inconsistências na geração do certificado");
+                if(!(consoleOut == null))consoleOut.append("\n\ndeletando client_trustore.jks para não causar inconsistências na geração do certificado\n");
                 new File("clientProgram\\client_trustore.jks").delete();
             }
             
             
             String openssl = "OpenSSL\\bin\\openssl.exe";
+            String opencnf = new File("OpenSSL\\bin\\openssl.cnf").getAbsolutePath();
             
             File dir = new File("tempkey");
             dir.mkdir();
             if(!dir.exists())
             {
-                if(!(consoleOut == null))consoleOut.append("\n\nFalha ao criar diretório '"+dir.getAbsolutePath()+"'. não poderá criar certificado");
+                if(!(consoleOut == null))consoleOut.append("\n\nFalha ao criar diretório '"+dir.getAbsolutePath()+"'. não poderá criar certificado\n");
                 return;
             }
+            
+            //https://stackoverflow.com/questions/16658038/cant-open-config-file-usr-local-ssl-openssl-cnf-on-windows
+            //exec(consoleOut,"set","OPENSSL_CONF="+opencnf);
             
             exec(consoleOut,openssl,"genrsa","-out","tempkey\\server.key",strBits);
             
             exec(consoleOut,openssl,"rsa","-in","tempkey\\server.key","-out","tempkey\\nserver.key");
-            exec(consoleOut,openssl,"req","-sha256","-new","-key","tempkey\\server.key","-out","tempkey\\server.csr","-subj",
+            exec(consoleOut,openssl,"req","-config",opencnf,"-sha256","-new","-key","tempkey\\server.key","-out","tempkey\\server.csr","-subj",
                 "/C="+strCountry+
                     "/ST="+strState+
                     "/L="+strCity+

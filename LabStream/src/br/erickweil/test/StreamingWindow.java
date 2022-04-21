@@ -27,7 +27,7 @@ public class StreamingWindow extends javax.swing.JFrame implements ImageListener
     
 
     @Override
-    public synchronized void setImage(BufferedImage img) {
+    public void setImage(BufferedImage img) {
         /*int screen_width = img.getWidth();
         int screen_height = img.getHeight();
         float aspect_ratio = (float)screen_width / (float)screen_height;
@@ -41,8 +41,14 @@ public class StreamingWindow extends javax.swing.JFrame implements ImageListener
         //SurfaceBlur surf = new SurfaceBlur(img, 4, 1, 50, 1);
         //BufferedImage new_img = surf.run();
         //ImageIcon icon = new ImageIcon(low_screen);
+        
         ImageIcon icon = new ImageIcon(img);
         label_fundo.setIcon(icon);
+        //            int screen_width = img.getWidth();
+        //    int screen_height = img.getHeight();
+        
+        //    System.out.println("SETING IMG: "+screen_width+","+screen_height);
+        //label_fundo.setText("Funcionou");
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +63,7 @@ public class StreamingWindow extends javax.swing.JFrame implements ImageListener
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        label_fundo.setText("jLabel1");
+        label_fundo.setText("jLabel2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

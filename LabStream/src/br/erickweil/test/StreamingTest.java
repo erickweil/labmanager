@@ -196,7 +196,7 @@ public class StreamingTest {
             bytes_sent += packet_size;
             
             if(packets_sent % 10 == 0)
-            Thread.sleep(1);
+                Thread.sleep(1);
             sendData = new byte[packet_size];
         }
         last_index = index;
@@ -209,6 +209,11 @@ public class StreamingTest {
         sendData[1] = (byte)((-1>>8)&0xFF);
         sendData[2] = (byte)((-1>>16)&0xFF);
         sendData[3] = (byte)((-1>>24)&0xFF);
+        
+                sendData[4] = (byte)(hilbimg.width&0xFF);
+                sendData[5] = (byte)((hilbimg.width>>8)&0xFF);
+                sendData[6] = (byte)(hilbimg.height&0xFF);
+                sendData[7] = (byte)((hilbimg.height>>8)&0xFF);
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, 9876);
         clientSocket.send(sendPacket);
 

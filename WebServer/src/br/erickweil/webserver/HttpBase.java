@@ -36,7 +36,7 @@ public abstract class HttpBase {
 	public HashMap<String,String> cookies;
 	protected byte[] content;
 	public String http_version;
-	
+    public static boolean LOG = false;
 	public HttpBase()
 	{
 		headers = new InsensitiveMap();
@@ -84,7 +84,7 @@ public abstract class HttpBase {
 	// não se sabe o comprimento do conteúdo, vai ler até a conexão fechar ou não ter mais oq ler
     protected void readBlindContent(DataInputStream reader) throws IOException
     {
-    	System.out.println("Reading Blind Content!!!");
+    	if(LOG)System.out.println("Reading Blind Content!!!");
 		try 
 		{
 	    	int Chunk_Length = -1;
@@ -96,17 +96,17 @@ public abstract class HttpBase {
 		    	Chunk_Length = reader.available();
 		    	if(Chunk_Length > 0)
 		    	{
-			    	System.out.print("Available->"+Chunk_Length);
+			    	if(LOG)System.out.print("Available->"+Chunk_Length);
 			    	byte[] chunk = new byte[Chunk_Length];
 					reader.readFully(chunk);
 					stream.write(chunk);
 					last_read = System.currentTimeMillis();
 					int b = reader.read();
 					if(b == -1){ 
-						System.out.println(" -> END");
+						if(LOG)System.out.println(" -> END");
 						return;
 					}
-					System.out.println(" last byte -> ("+b+") : "+(char)b);
+					if(LOG)System.out.println(" last byte -> ("+b+") : "+(char)b);
 					stream.write(b);
 		    	}
 				Thread.sleep(10);
@@ -144,7 +144,7 @@ public abstract class HttpBase {
 	    	do
 	    	{
 		    	Chunk_Length = Integer.parseInt(ReaderWriter.readASCIILine(reader).trim(),16);
-		    	System.out.println("Chunk->"+Chunk_Length);
+		    	if(LOG)System.out.println("Chunk->"+Chunk_Length);
 		    	//ReaderWriter.writeASCII(Integer.toHexString(Chunk_Length)+CRLF, stream);
 		    	byte[] chunk = new byte[Chunk_Length];
 				reader.readFully(chunk);
@@ -168,7 +168,7 @@ public abstract class HttpBase {
     	String linha = "";
 		while((linha = readHeaderLine(reader)) != null)
 		{
-			System.out.println(linha);
+			if(LOG)System.out.println(linha);
 			String key = linha.substring(0,linha.indexOf(':')).trim();
 			String value = linha.substring(linha.indexOf(':')+1,linha.length()).trim();
 			addHeader(key, value);
@@ -216,7 +216,7 @@ public abstract class HttpBase {
 			for(String v : values)
 			{
 				ReaderWriter.writeASCII(key+": "+v+CRLF,writer);
-				System.out.println(key+": "+v);
+				if(LOG)System.out.println(key+": "+v);
 			}
 		}
 		ReaderWriter.writeASCII(""+CRLF,writer);

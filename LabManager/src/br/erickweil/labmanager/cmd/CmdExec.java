@@ -302,10 +302,10 @@ public abstract class CmdExec {
      */
     public static void stop(String process,boolean force)
     {
-        if(is_running_process(process))
-        {
+        //if(is_running_process(process))
+        //{
             lowlevel_stop(process,force);
-        }        
+        //}        
     }
     
     public static void stop(CmdProcess process,boolean force)
@@ -506,7 +506,15 @@ public abstract class CmdExec {
      */
     public static List<CmdProcess> running_programs()
     {
-        return INSTANCE._running_programs();
+        List<CmdProcess> programs = INSTANCE._running_programs();
+        
+        //System.out.println("Running programs:"+programs.size());
+        //for(int i=0;i<programs.size();i++)
+        //{
+        //    System.out.println("\t"+programs.get(i).name);
+        //}
+        
+        return programs;
     }
    
      /**

@@ -38,7 +38,7 @@ public class Inicio {
     
     public static boolean _logtofile = false;
     public static String _log_folder = "%appdata%/LabManager/logs/";
-    public static String _down_folder = "%appdata%/LabManager/down/";
+    public static String _down_folder = "%USERPROFILE%/Downloads/";//"%appdata%/LabManager/down/";
     public static String _conf_folder = "%appdata%/LabManager/conf/";
     public static String _temp_folder = "%Temp%";
 
@@ -60,7 +60,7 @@ public class Inicio {
         if(CheckOS.isWindows())
         {
             _log_folder = "%appdata%/LabManager/logs/";
-            _down_folder = "%appdata%/LabManager/down/";
+            _down_folder = "%USERPROFILE%/Downloads/";
             _conf_folder = "%appdata%/LabManager/conf/";
             _temp_folder = "%Temp%";
         }

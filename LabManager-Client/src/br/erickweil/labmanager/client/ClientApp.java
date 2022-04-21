@@ -35,6 +35,8 @@ import br.erickweil.secure.SecureClient;
 import br.erickweil.streaming.StreamWatcher;
 import br.erickweil.streaming.tcpwrapper.TCPHilbertWatcher;
 import br.erickweil.streaming.watchers.HilbertWatcher;
+import br.erickweil.webserver.HttpClientProtocol;
+import br.erickweil.webserver.HttpResponse;
 import br.erickweil.webserver.ProtocolFactory;
 import br.erickweil.webserver.ServerProtocol;
 import br.erickweil.webserver.WebClient;
@@ -43,9 +45,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -165,9 +170,17 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
             {
                 try
                 {
+                    int tries = 0;
                     while(true)
                     {
+                        // obter endereço local ao qual se deve conectar
+                        if(ClientMain._synchronize_remote && tries % 5 == 0)
+                        {
+                            synchronizeWithRemote();
+                        }
+                        
                         connect();
+                        
                         long runing_time = System.currentTimeMillis() - startup_time;
                         System.out.println("Reconectando...");
 
@@ -212,7 +225,7 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
                             Thread.sleep(ClientMain._delay_slowcheck);
                         }
 
-
+                        tries++;
                     }
                 }
                 catch (ExitAppException e) {
@@ -280,7 +293,7 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
         try
         {
             client = new SecureClient(serverAddress,serverPort, this, "client_trustore.jks", "1a2b3c4d");
-            client.LOG = false;
+            client.LOG = true;
         }
         catch(SecurityException | NullPointerException | IllegalArgumentException e)
         {
@@ -296,7 +309,110 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
             throw new ExitAppException("Erro ao conectar com socket seguro:", e, false);
         }
 	}
-    
+        
+        private boolean synchronizeWithRemote()
+        {
+            try
+            {
+            SecureClient client = null;
+            HashMap<String,String> cookies = new HashMap<>();
+            
+            final HttpClientProtocol httpprotocol = new HttpClientProtocol(
+            ClientMain._synchronize_remote_host,
+            ClientMain._synchronize_remote_uri,
+            cookies,
+            "GET",
+                    "version=1"
+                    +"&action=synchronize"
+                    +"&uuid="+URLEncoder.encode(ClientMain._uuid,"UTF-8")
+                    +"&extra="+URLEncoder.encode(ClientMain._extra,"UTF-8"));
+            
+            try
+            {
+                client = new SecureClient(ClientMain._synchronize_remote_host,443, 
+                new ProtocolFactory() {
+                    @Override
+                    public ServerProtocol get() {
+                        return httpprotocol;
+                    }
+                }
+                , null, null);
+                client.LOG = false;
+            }
+            catch(SecurityException | NullPointerException | IllegalArgumentException e)
+            {
+                throw new ExitAppException("Erro ao Criar socket seguro:", e, false);
+            }
+
+            try
+            {
+                client.run();
+            }
+            catch(SecurityException  | NullPointerException | IllegalArgumentException e)
+            {
+                throw new ExitAppException("Erro ao conectar com socket seguro:", e, false);
+            }
+            
+            try
+            {
+                HttpResponse response = httpprotocol.response;
+                if(!response.status_code.equals("200"))
+                    return false;
+
+                String responseText = response.getResponseAsText();
+                if(responseText == null || responseText.trim().isEmpty())
+                    return false;
+                
+                System.out.println("Resposta do servidor de sincronização:\n"+responseText);
+                
+                int indexOfLn =  responseText.indexOf("\n");
+                String responseStatus = responseText.substring(0, indexOfLn);            
+                
+                if(!responseStatus.equals("OK"))
+                    return false;
+                
+                String responseBody = responseText.substring(indexOfLn + 1, responseText.length());
+                
+                JSONObject json = (JSONObject) new JSONParser().parse(responseBody);
+                
+                boolean changedConf = false;
+                if(json.containsKey("endereco"))
+                {
+                    String endereco = (String) json.get("endereco");
+                    if(endereco != null && !endereco.trim().isEmpty())
+                    {
+                        changedConf = !ClientMain._endereco.equals(endereco);
+                        ClientMain._endereco = endereco;
+                    }
+                }
+                
+                if(json.containsKey("server_port"))
+                {
+                    int port = (int) json.get("server_port");
+                    changedConf = ClientMain._server_port != port;
+                    ClientMain._server_port = port;
+                }
+                
+                if(changedConf) ClientMain.conf.Save();
+                
+                return true;
+            }
+            catch(IOException | ParseException e)
+            {
+                e.printStackTrace();
+            }
+            
+            
+            }
+            catch(UnsupportedEncodingException e)
+            {
+                throw new ExitAppException("Erro ao Montar requisição:", e, false);
+            }
+            
+            return false;
+        }
+        
+        
     public void checkWifiNetwork()
     {
 

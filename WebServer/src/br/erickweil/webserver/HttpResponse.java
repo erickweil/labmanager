@@ -102,5 +102,10 @@ public class HttpResponse extends HttpBase{
 		}
 	}
 	
-
+    public String getResponseAsText() throws IOException
+    {
+        ByteArrayOutputStream respBytes = new ByteArrayOutputStream();
+        writeOnlyContentIntoOutputStream(new DataOutputStream(respBytes));
+        return new String(respBytes.toByteArray(),Charset.forName("UTF-8"));
+    }
 }

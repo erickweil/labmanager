@@ -34,5 +34,15 @@ Thumbs.db
 
 # Java and Gradle #
 ############
+*.jks
+*.jks.aes
+nbproject/
 build/
 .gradle/
+/LabManager-Client/dist/
+/LabManager-Install/dist/
+/LabManager-Server/dist/
+/LabManager-Client/store/
+/LabManager-Install/store/
+/LabManager-Server/store/
+

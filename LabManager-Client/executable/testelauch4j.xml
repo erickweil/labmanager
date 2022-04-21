@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>D:\EclipseProjects\LabManager-Client\store\LabManager.jar</jar>
-  <outfile>D:\EclipseProjects\LabManager-Client\executable\svchost.exe</outfile>
+  <jar>D:\git\labmanager\LabManager-Client\store\LabManager.jar</jar>
+  <outfile>D:\git\labmanager\LabManager-Client\executable\svchost.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>

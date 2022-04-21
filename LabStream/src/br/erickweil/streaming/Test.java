@@ -26,7 +26,7 @@ public class Test {
         //PrintScreenTool tool = new PrintScreenTool();
         //BufferedImage img = tool.printScreen();
         //ImageIO.write(img, "png", new File("test.png"));
-        TCPStreamBroadcaster streamer = new TCPHilbertBroadcaster(9876, 10, 512,80,350);
+        TCPStreamBroadcaster streamer = new TCPHilbertBroadcaster(9876, 10, 1280,80,350);
 
         System.out.println(streamer.max_bandwith);
         //StreamBroadcaster streamer = new HilbertBroadcaster(args.length == 2 ? args[1] : "10.115.254.191", 9876, 10, -1,120,-1);

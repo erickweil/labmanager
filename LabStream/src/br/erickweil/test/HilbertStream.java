@@ -392,7 +392,7 @@ public class HilbertStream extends HilbertImage {
                 //final int apg = data[api * 3 + 1];
                 //final int apb = data[api * 3 + 2];
 
-                for(int i=0;i<length;i++)
+                for(int i=0;i<length && index+i < hilbert_indexes.length;i++)
                 {
                     //final int x = hilbert_x[index+i];
                     //final int y = hilbert_y[index+i];

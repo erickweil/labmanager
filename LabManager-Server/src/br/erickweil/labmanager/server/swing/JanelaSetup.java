@@ -618,7 +618,9 @@ public class JanelaSetup extends javax.swing.JFrame {
         // abre a pasta
         try  {
             File installerDir = ProgramOpener.parsePath("%USERPROFILE%/Documents/Lab Manager/clientInstaller/");
-            FilesHelper.deleteDirectory(StatusReceiver.getDefault(), installerDir);
+            
+            if(installerDir.exists())
+                FilesHelper.deleteDirectory(StatusReceiver.getDefault(), installerDir);
             
             FilesHelper.zipFile(new File("clientProgram"), new File(installerDir,"clientProgram.zip"));
             FilesHelper.copyDirectory(StatusReceiver.getDefault(),new File("installerProgram"), installerDir);
