@@ -48,7 +48,8 @@ public class HttpRequest extends HttpBase{
 			Request_line = ReaderWriter.readASCIILine(reader);
 		} catch (EOFException e1) {
 			// TODO Auto-generated catch block
-			System.out.println("ping request");
+			System.out.println("EOF");
+            
 			return false;
 		}
 		if(LOG)System.out.println(Request_line);

@@ -58,7 +58,12 @@ public class ServerConnection implements Runnable{
 			protocol.output = output;
 			protocol.socket = clientSocket;
 			protocol.charset = charset;
-			protocol.processRequest();			
+			
+            do{
+                protocol.processRequest();
+            }
+            while(protocol.repeat() && !clientSocket.isClosed() && !clientSocket.isInputShutdown() && !clientSocket.isOutputShutdown());
+            
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

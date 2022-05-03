@@ -78,6 +78,5 @@ public class ServerHttp extends ServerProtocol {
 		
 		Response.writeIntoOutputStream(output);
 		//new Proxy(this).get();
-	}
-
+    }
 }

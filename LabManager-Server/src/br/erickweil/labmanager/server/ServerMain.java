@@ -70,9 +70,9 @@ public class ServerMain {
     //public static String _stream_host = "192.168.2.6";
     public static int _stream_framerate = 5;
     public static int _stream_width = -1;
-    public static int _stream_fullframeinterval = 18;
+    public static int _stream_fullframeinterval = 30;//18;
     public static int _stream_threshold = 70;
-    public static int _stream_maxbandwidth = 0;
+    public static int _stream_maxbandwidth = 200000;
     public static int _STREAM_port = 22135;
     public static int _readTimeout = 60000;
     public static int _showScreenLoop = 1000;

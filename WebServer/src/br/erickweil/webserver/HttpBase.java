@@ -34,11 +34,13 @@ public abstract class HttpBase {
 	protected ByteArrayOutputStream writecontent;
 	private InsensitiveMap headers;
 	public HashMap<String,String> cookies;
-	protected byte[] content;
+	public byte[] content;
 	public String http_version;
     public static boolean LOG = false;
+    public boolean closeConnection;
 	public HttpBase()
 	{
+        this.closeConnection = true;
 		headers = new InsensitiveMap();
 		http_version = "HTTP/1.1";
 	}
@@ -189,6 +191,7 @@ public abstract class HttpBase {
     
     protected void writeHeadersandContent(DataOutputStream writer) throws IOException
     {
+        if(closeConnection)
 		setHeader("Connection","close"); // pq vai fechar a conexão
 		
 		int Content_length = 0;
@@ -231,6 +234,12 @@ public abstract class HttpBase {
 		}
     }
 	
+    public void setContent(byte[] content)
+    {
+        this.content = content;
+        if(content != null)
+        setHeader("Content-Length", ""+content.length);
+    }
 	
     public int intHeader(String name){
 		return getHeader(name) != null ? Integer.parseInt(getHeader(name)) : 0;

@@ -42,10 +42,10 @@ public class WebServer implements Runnable, ClientCountListener{
         openServerSocket();
         while(! isStopped())
         {
-        	if(client_count > 1000) 
+        	if(client_count > 5000) 
         	{
         		try {
-					while(client_count > 1000) 
+					while(client_count > 5000) 
 		        	{
 						System.out.println("Ainda Tem muitos clientes("+client_count+"), esperando um pouco");
 						Thread.sleep(1000);

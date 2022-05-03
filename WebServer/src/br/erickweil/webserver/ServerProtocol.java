@@ -62,4 +62,9 @@ public abstract class ServerProtocol {
     {
         return timeout;
     }
+    
+    protected boolean repeat()
+    {
+        return false;
+    }
 }

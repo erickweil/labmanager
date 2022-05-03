@@ -46,7 +46,7 @@ public class HttpResponse extends HttpBase{
 	public boolean buildfromInputStream(DataInputStream reader) throws IOException
 	{
 		String Status_line = ReaderWriter.readASCIILine(reader);
-		System.out.println(Status_line);
+		if(LOG)System.out.println(Status_line);
 		String[] Status_split = Status_line.split(" ");
 		if(Status_split == null || Status_split.length==0)
 		{
@@ -73,7 +73,7 @@ public class HttpResponse extends HttpBase{
 	public void writeIntoOutputStream(DataOutputStream writer) throws IOException
 	{
 		String Response_status = http_version+" "+status_code+" "+reason_frase; 
-		System.out.println(Response_status);
+		if(LOG)System.out.println(Response_status);
 		ReaderWriter.writeASCII(Response_status+CRLF,writer);
 		
 		if(headersLength() == 0)
