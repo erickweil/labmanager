@@ -53,7 +53,7 @@ public class ServerConnection implements Runnable{
             clientSocket.setSoTimeout(protocol.getTimeout());
 			input  = new DataInputStream(clientSocket.getInputStream());
 			output = new DataOutputStream(clientSocket.getOutputStream());
-			System.out.println("Cliente conectou");
+			if(HttpBase.LOG)System.out.println("Cliente conectou");
 			protocol.input = input;
 			protocol.output = output;
 			protocol.socket = clientSocket;
@@ -69,7 +69,7 @@ public class ServerConnection implements Runnable{
 			e.printStackTrace();
 		}
         finally {
-        	System.out.println("Cliente desconectou");
+        	if(HttpBase.LOG)System.out.println("Cliente desconectou");
             
             try{
                 input.close();

@@ -174,10 +174,10 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
                     while(true)
                     {
                         // obter endereço local ao qual se deve conectar
-                        if(ClientMain._synchronize_remote && tries % 5 == 0)
-                        {
-                            synchronizeWithRemote();
-                        }
+                        //if(ClientMain._synchronize_remote && tries % 5 == 0)
+                        //{
+                        //    synchronizeWithRemote();
+                        //}
                         
                         connect();
                         
@@ -310,7 +310,7 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
         }
 	}
         
-        private boolean synchronizeWithRemote()
+        /*private boolean synchronizeWithRemote()
         {
             try
             {
@@ -411,7 +411,7 @@ public class ClientApp implements Runnable, ProtocolFactory, Taskkiller.KillerHa
             
             return false;
         }
-        
+        */
         
     public void checkWifiNetwork()
     {

@@ -40,7 +40,7 @@ public class HttpRequest extends HttpBase{
 		method = "GET";
 		uri = "/";
 	}
-	
+    
 	public boolean buildfromInputStream(DataInputStream reader) throws IOException
 	{
 		String Request_line = null;

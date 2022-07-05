@@ -1,0 +1,23 @@
+uninstall = false
+uninstall_directories =
+;
+uninstall_keys =
+;
+uninstall_services =
+;
+
+install = true
+install_directories_copy =
+"teste.zip,.\\teste\\"
+;
+install_keys =
+;
+install_services =
+;
+post_install_cmds =
+;
+pre_install_cmds =
+;
+restartAfterInstall = false
+restartAfterKeyRemoval = false
+

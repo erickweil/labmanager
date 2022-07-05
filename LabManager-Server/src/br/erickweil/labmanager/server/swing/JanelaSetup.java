@@ -570,7 +570,7 @@ public class JanelaSetup extends javax.swing.JFrame {
             cert_console
         );
 
-        if((new File("server_keystore.jks.aes").exists() || new File("server_keystore.jks.aes").exists() )
+        if((new File("server_keystore.jks.aes").exists() || new File("server_keystore.jks").exists() )
             && new File("clientProgram\\client_trustore.jks").exists())
         {
             JOptionPane.showMessageDialog(this,"Certificado gerado com sucesso!", //mensagem

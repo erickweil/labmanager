@@ -118,6 +118,7 @@ public class UniversalInstaller {
                     {
                         if(source.getName().endsWith(".zip"))
                         {
+                            g.sendMessage("Extraindo arquivos...");
                             FilesHelper.unzip(source,destination);
                         }    
                         else
@@ -136,7 +137,7 @@ public class UniversalInstaller {
             catch (IOException e) 
             {
                 e.printStackTrace();
-                g.sendMessage("Erro ao deletar '"+directories[i]+"': "+e.getClass().toString()+" -> "+e.getMessage());
+                g.sendMessage("Erro ao copiar '"+directories[i]+"': "+e.getClass().toString()+" -> "+e.getMessage());
             }
             
         }
@@ -205,7 +206,7 @@ public class UniversalInstaller {
             g.sendMessage("parando serviço:"+services[i]);
             exec(g,nssmPath,"stop",servicename);
             
-            Thread.sleep(500);
+            Thread.sleep(5000);
             
             g.sendMessage("removendo serviço:"+services[i]);
             exec(g,nssmPath,"remove",servicename,"confirm");

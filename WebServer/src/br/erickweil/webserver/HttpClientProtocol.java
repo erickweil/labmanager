@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -21,42 +23,34 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class HttpClientProtocol extends ServerProtocol{
 
-    String host;
-    String uri;
     HashMap<String,String> cookies;
-    String method;
-    String getpostData;
-    String contentType;
-    
+
+    public HttpRequest request;
     public HttpResponse response;
+    
+    public HttpClientProtocol(HttpRequest request,HashMap<String,String> cookies)
+    {
+        this.request = request;
+        this.cookies = cookies;
+    }
+    
     public HttpClientProtocol(String host,String uri,HashMap<String,String> cookies,String method,String getpostData,String contentType) 
     {
-        this.host = host;
-        this.uri = uri;
-        this.cookies = cookies;
-        this.method = method;
-        this.getpostData = getpostData;
-        this.contentType = contentType;
+        this.cookies = cookies;   
+        initReq(host,uri,method,getpostData,contentType);
     }
     
     public HttpClientProtocol(String host,String uri,HashMap<String,String> cookies,String method,String getpostData) 
     {
-        this.host = host;
-        this.uri = uri;
         this.cookies = cookies;
-        this.method = method;
-        this.getpostData = getpostData;
-        this.contentType = "application/x-www-form-urlencoded";
-    }
-
-    @Override
-    public void processRequest() throws IOException {
-        response = httpReq(host,uri,cookies,method,getpostData,contentType);        
+        initReq(host,uri,method,getpostData,"application/x-www-form-urlencoded");
     }
     
-    public HttpResponse httpReq(String host,String uri,HashMap<String,String> cookies,String method,String getpostData,String contentType) throws IOException
+    private void initReq(String host, String uri, String method, String getpostData,String contentType)
     {
-        HttpRequest req = new HttpRequest();
+        request = new HttpRequest();
+        HttpRequest req = request;
+        
         req.http_version = "1.1";
         req.method = method;
         req.uri = uri;    
@@ -67,7 +61,9 @@ public class HttpClientProtocol extends ServerProtocol{
             urlParameters = uri.split("\\?")[1];
             uri = uri.split("\\?")[0];
         }
-        else if(method.equals("GET")) urlParameters = getpostData;
+        else if(method.equals("GET")) urlParameters = getpostData == null ? "" : getpostData;
+        
+        
         
         String postdata = getpostData;
         
@@ -77,7 +73,7 @@ public class HttpClientProtocol extends ServerProtocol{
         (method.equals("POST") ? "Content-Length: "+postdata.length()+"\r\n" : "")+
         //"Origin: http://"+host+"\r\n"+
         (method.equals("POST") ? "Content-Type: "+contentType+"\r\n" : "")+
-        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36\r\n"+
+        "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36\r\n"+
         "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\r\n"+
         "Accept-Encoding: raw\r\n"+
         "Accept-Language: pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7\r\n"+
@@ -90,13 +86,27 @@ public class HttpClientProtocol extends ServerProtocol{
         ByteArrayInputStream inputBytes = new ByteArrayInputStream(requestBytes);
         DataInputStream inputRequest= new DataInputStream(inputBytes);
         
-        req.buildfromInputStream(inputRequest);
+        try {
+            req.buildfromInputStream(inputRequest);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void processRequest() throws IOException {
+        //response = httpReq(host,uri,cookies,method,getpostData,contentType);        
+    
+        if(!cookies.isEmpty())
+        {
+            request.delHeader("Cookie");
+            request.addHeader("Cookie",Cookie.encodeCookies(cookies));
+        }
         
-        
-        req.writeIntoOutputStream(output);
+        request.writeIntoOutputStream(output);
         output.flush();
         
-        HttpResponse response = new HttpResponse();
+        response = new HttpResponse();
         response.buildfromInputStream(input);
                 
         List<String> Set_Cookie_headers = response.getHeaderValues("Set-Cookie");
@@ -108,14 +118,14 @@ public class HttpClientProtocol extends ServerProtocol{
         {
             for(int i =0;i< Set_Cookie_headers.size();i++)
             {
-                HashMap<String,String> param = Cookie.decodeCookies(Set_Cookie_headers.get(i));
-                cookies.putAll(param);
+                Cookie.decodeSetCookie(Set_Cookie_headers.get(i),cookies);
+                //cookies.putAll(param);
                 //System.out.println(Set_Cookie_headers.get(i));
             }
         }
         
-        List<String> redirectHeader = response.getHeaderValues("Location");
-        if(redirectHeader != null && redirectHeader.size() > 0)
+        /*List<String> redirectHeader = response.getHeaderValues("Location");
+        if(this.autoRedirect && redirectHeader != null && redirectHeader.size() > 0)
         {
             String site = redirectHeader.get(0).replace("https://", "");
             host = site.substring(0,site.indexOf("/"));
@@ -126,10 +136,10 @@ public class HttpClientProtocol extends ServerProtocol{
                 getpostData = uri.substring(uri.indexOf("?")+1,uri.length());
                 uri = uri.substring(0,uri.indexOf("?"));
             }
-            //System.out.println("site -> '"+host+"','"+uri+"','"+getpostData+"'");
+            if(HttpBase.LOG)System.out.println("site -> '"+host+"','"+uri+"','"+getpostData+"'");
             return httpReq(host, uri, cookies, "GET", getpostData,contentType);
         }
         else
-        return response;
+        return response;*/
     }
 }

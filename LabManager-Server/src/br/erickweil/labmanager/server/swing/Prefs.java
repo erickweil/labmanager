@@ -55,11 +55,15 @@ public class Prefs {
             prefs.put("window_w", ""+sw.getWidth());
             prefs.put("window_h", ""+sw.getHeight());
             
+            if(MapaCanvas.backgroundPath != null)
+            {
             prefs.put("pcmap_background", MapaCanvas.backgroundPath.getAbsolutePath());
+            }
             prefs.put("pcmap_backgroundscale", ""+MapaCanvas.background_scale);
             prefs.put("pcmap_backgroundx", ""+MapaCanvas.background_posx);
             prefs.put("pcmap_backgroundy", ""+MapaCanvas.background_posy);
-
+            
+            
             JsonParser.save(prefs, new File(ServerMain._preferencesdir+"prefs.json"));
             System.out.println("Preferences Saved.");
         }
@@ -100,7 +104,11 @@ public class Prefs {
                 sw.setBounds(x, y, w, h);
             }
             
-            MapaCanvas.backgroundPath = new File((String)prefs.get("pcmap_background"));
+            String pcmap = prefs.getOrDefault("pcmap_background", "");
+            if(pcmap != null && !pcmap.isEmpty())
+            {
+                MapaCanvas.backgroundPath = new File(pcmap);
+            }
             MapaCanvas.background_scale = Double.parseDouble(prefs.get("pcmap_backgroundscale"));
             MapaCanvas.background_posx = Double.parseDouble(prefs.get("pcmap_backgroundx"));
             MapaCanvas.background_posy = Double.parseDouble(prefs.get("pcmap_backgroundy"));

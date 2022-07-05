@@ -108,4 +108,18 @@ public class HttpResponse extends HttpBase{
         writeOnlyContentIntoOutputStream(new DataOutputStream(respBytes));
         return new String(respBytes.toByteArray(),Charset.forName("UTF-8"));
     }
+
+    public void printHeaders() {
+        String[] keys = getHeadersKeys();
+		for(int i=0;i<keys.length;i++)
+		{
+			String key = keys[i];
+			List<String> values = getHeaderValues(key);
+			
+			for(String v : values)
+			{
+				System.out.println(key+": "+v);
+			}
+		}
+    }
 }

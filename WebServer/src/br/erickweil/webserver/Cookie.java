@@ -36,6 +36,34 @@ public class Cookie {
 		
 	}
 	
+    public static void decodeSetCookie(String setCookieString,HashMap<String,String> cookies)
+	{
+        String[] cookies_split;
+		if(setCookieString.contains(";"))
+		{
+			cookies_split = setCookieString.split(";");
+		}
+		else
+		{
+			cookies_split = new String[]{setCookieString};
+		}
+        
+		// cookie = value; path = blabla; expires = bla bla; dfgdgdfgfg
+        if(cookies_split[0].contains("="))
+        {
+            String[] key_value = cookies_split[0].split("=");
+            String key = key_value[0].trim();
+            String value = key_value[1].trim();
+            cookies.put(key/*.toLowerCase()*/, value);
+        }
+        else
+        {
+            cookies.put(cookies_split[0].trim()/*.toLowerCase()*/, null);
+        }
+		
+		
+    }
+    
 	public static HashMap<String,String> decodeCookies(String CookieString)
 	{
 		HashMap<String, String> cookies = new LinkedHashMap<>();
@@ -56,11 +84,11 @@ public class Cookie {
 				String[] key_value = cookies_split[i].split("=");
 				String key = key_value[0].trim();
 				String value = key_value[1].trim();
-				cookies.put(key.toLowerCase(), value);
+				cookies.put(key/*.toLowerCase()*/, value);
 			}
 			else
 			{
-				cookies.put(cookies_split[i].trim().toLowerCase(), null);
+				cookies.put(cookies_split[i].trim()/*.toLowerCase()*/, null);
 			}
 		}
 		

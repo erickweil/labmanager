@@ -42,20 +42,20 @@ public class InstallGrafico extends javax.swing.JFrame implements StatusReceiver
     
    public static String[] _uninstall_directories = new String[]
    {
-       "C:\\Program Files\\labmanager\\",
-       "C:\\Program Files\\dnsproxy\\",
+       "C:\\Program Files\\labmanager\\"
+       //,"C:\\Program Files\\dnsproxy\\"
    };
    public static String[] _uninstall_keys = new String[]
    {
-       "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\LABMANAGER",
-       "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\DNSPROXY"
+       "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\LABMANAGER"
+       //,"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\run\\DNSPROXY"
    };
    public static String[] _uninstall_services = new String[]
    {
        "nssm.exe,labmanager_master"
    };
    
-   public static String _install_destination = "C:\\Program Files\\labmanager\\";
+   //public static String _install_destination = "C:\\Program Files\\labmanager\\";
            
    public static String[] _install_directories_copy = new String[]
    {
@@ -75,6 +75,11 @@ public class InstallGrafico extends javax.swing.JFrame implements StatusReceiver
    {
    //    "netsh interface ip set address \"Local Area Connection\" dhcp",
    //    "netsh interface ip set dns \"Local Area Connection\" dhcp"
+   };
+   
+   public static String[] _pre_uninstall_cmds = new String[]
+   {
+          //"C:\\Program Files\\labmanager\\nssm.exe stop labamanager_master"
    };
    
    public static String[] _post_install_cmds = new String[]
@@ -118,21 +123,27 @@ public class InstallGrafico extends javax.swing.JFrame implements StatusReceiver
             int percent = jProgressBar1.getMaximum()/10;
             jProgressBar1.setValue(percent);
             
-            for(String s : _pre_install_cmds)
-            {
-                UniversalInstaller.exec(this,"cmd","/c",s);
-            }
+            
             
             if(_uninstall)
             {
                 
                 status.setText("Desinstalando...");
+                Thread.sleep(1000);
+                
+                for(String s : _pre_uninstall_cmds)
+                {
+                    UniversalInstaller.exec(this,"cmd","/c",s);
+                }
+                
+                status.setText("Deletando os registros...");
+                
                 UniversalInstaller.deleteRegistry(this, _uninstall_keys);
                 jProgressBar1.setValue(percent*3);
                 
-                status.setText("Parando os processos...");
                 
-                status.setText("Desinstalando.");
+                
+                status.setText("Desinstalando os serviços.");
                 UniversalInstaller.unregisterService(this, _uninstall_services);
                 
                 Thread.sleep(100);
@@ -153,13 +164,20 @@ public class InstallGrafico extends javax.swing.JFrame implements StatusReceiver
                     CmdExec.restart();
                 }
                 
-                status.setText("Desinstalando..");
+                status.setText("Deletando os diretórios..");
                 UniversalInstaller.deleteFiles(this, _uninstall_directories);
                 jProgressBar1.setValue(percent*5);
             }
             
             if(_install)
             {
+                status.setText("Instalando.");
+                
+                for(String s : _pre_install_cmds)
+                {
+                    UniversalInstaller.exec(this,"cmd","/c",s);
+                }
+                
                 status.setText("Instalando.");
                 Thread.sleep(1000);
                 UniversalInstaller.copyDirectories(this, _install_directories_copy);

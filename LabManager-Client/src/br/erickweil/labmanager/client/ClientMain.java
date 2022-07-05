@@ -66,7 +66,7 @@ public class ClientMain {
     
     public static String _uuid = "none";
     // Informações sobre o computador/sala Usado apenas para identificação no server remoto
-    public static String _extra = "{\"idConta\":1,\"grupo\":\"ifro_lab06\"}";
+    //public static String _extra = "{\"idConta\":1,\"grupo\":\"ifro_lab06\"}";
     //public static String _extra = "{\"idConta\":1,\"grupo\":\"casa\"}";
 	// 123456 hash
 	//public static String _serverpasshash = "$s0$100801$wpvi6RatmHTufOf0J11XFg==$nUUrwbIYPjQdC6pT/GCpSPtB9LIHhN+a5FYm2g80YbU=";
@@ -91,9 +91,9 @@ public class ClientMain {
     
     // Define a forma da conexão com o servidor
     // _synchronize_remote_host e _synchronize_remote_uri definem o site a ser conectado via HTTPS
-    public static boolean _synchronize_remote = true;
-    public static String _synchronize_remote_host = "app.passapassa.com.br";
-    public static String _synchronize_remote_uri = "/labmanager/synchronize.php";
+    //public static boolean _synchronize_remote = true;
+    //public static String _synchronize_remote_host = "app.passapassa.com.br";
+    //public static String _synchronize_remote_uri = "/labmanager/synchronize.php";
     
     public static boolean isMaster = true;
     

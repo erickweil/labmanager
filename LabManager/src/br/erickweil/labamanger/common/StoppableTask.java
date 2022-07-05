@@ -64,7 +64,7 @@ public abstract class StoppableTask implements Runnable{
                 if(isRunning())
                 {
                     System.out.println("Teve que dar o stop na Tarefa");
-                    thread.stop();
+                    //thread.stop();
                 }
             }
         }

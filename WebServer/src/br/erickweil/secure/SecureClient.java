@@ -31,12 +31,18 @@ import java.net.NoRouteToHostException;
 import java.net.PortUnreachableException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.SSLContext;
 
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 public class SecureClient implements Runnable {
     
@@ -45,6 +51,7 @@ public class SecureClient implements Runnable {
     public SSLSocket socket;
     protected ProtocolFactory protocolfactory;
     public boolean LOG = true;
+    public boolean disableCert = false;
     public SecureClient(String host,int port, ProtocolFactory protocolfactory, String keystore,String password) 
     {
         this.port = port;
@@ -57,6 +64,11 @@ public class SecureClient implements Runnable {
             System.setProperty("javax.net.ssl.trustStore", keystore);
             System.setProperty("javax.net.ssl.trustStorePassword", password);
         }
+    }
+    
+    public void disableCertValidation()
+    {
+        this.disableCert = true;    
     }
     
     @Override
@@ -77,9 +89,44 @@ public class SecureClient implements Runnable {
         
     }
     
-    private void connect() throws IOException {
-            SSLSocketFactory sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            socket = (SSLSocket) sslsocketfactory.createSocket(host, port);
+    private void connect() throws IOException {    
+        SSLSocketFactory sslsocketfactory;
+        if(disableCert) 
+        {
+            SSLContext sc;
+            try {
+                sc = SSLContext.getInstance("SSL");
+            
+    
+            TrustManager[] trustAllCerts = new TrustManager[] {
+               new X509TrustManager() {
+                  public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                  }
+
+                  public void checkClientTrusted(X509Certificate[] certs, String authType) {  }
+
+                  public void checkServerTrusted(X509Certificate[] certs, String authType) {  }
+
+               }
+            };
+            
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            
+            sslsocketfactory = sc.getSocketFactory();
+            } catch (NoSuchAlgorithmException ex) {
+                throw new IOException(ex.getMessage(),ex);
+            } catch (KeyManagementException ex) {
+                throw new IOException(ex.getMessage(),ex);
+            }
+        }
+        else
+        {
+            sslsocketfactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            
+        }   
+        
+        socket = (SSLSocket) sslsocketfactory.createSocket(host, port);
     }
     
     private void close() throws IOException

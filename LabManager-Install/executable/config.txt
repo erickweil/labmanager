@@ -1,5 +1,4 @@
 install = true
-install_destination = "C:\Program Files\labmanager\"
 install_directories_copy =
 "clientProgram.zip,C:\\Program Files\\labmanager\\"
 ;
@@ -9,7 +8,7 @@ install_keys =
 install_services =
 "C:\\Program Files\\labmanager\\nssm.exe,labmanager_master,C:\\Program Files\\labmanager\\labmanager_master.exe"
 ;
-restartAfterInstall = false
+restartAfterInstall = true
 restartAfterKeyRemoval = false
 uninstall = true
 uninstall_directories =

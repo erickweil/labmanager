@@ -199,11 +199,14 @@ public class OpensslHelper {
             byte[] serverKeystore = Files.readAllBytes(new File(dir,"server_keystore.jks").toPath());
             if(certificatePassword != null)
             {
+            
                 byte[] serverKeystore_aes = TestEncrypt.encryptWithPassw(serverKeystore, certificatePassword);
                 Files.write(new File("server_keystore.jks.aes").toPath(), serverKeystore_aes);
+               
             }
             else
             {
+                // copia do tempkey
                 Files.write(new File("server_keystore.jks").toPath(), serverKeystore);
             }
                 
@@ -211,8 +214,8 @@ public class OpensslHelper {
             // deletar diretorio tempkey
             //
             new File(dir,"server.crt").delete();
+            new File(dir,"server_pkcs.p12").delete(); 
             new File(dir,"server_keystore.jks").delete();
-            new File(dir,"server_pkcs.p12").delete();
             new File(dir,"server.key").delete();
             new File(dir,"nserver.key").delete();
             new File(dir,"server.csr").delete();
